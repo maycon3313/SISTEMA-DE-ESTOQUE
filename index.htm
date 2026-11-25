@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Estoque</title>
+    <style>
+        :root {
+            --verde-neon: #39ff14;
+            --verde-claro: #a8ff78;
+            --fundo: #050805;
+            --painel: #101510;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at top, rgba(57, 255, 20, 0.16), transparent 35%),
+                linear-gradient(135deg, #020402, var(--fundo));
+        }
+
+        .login {
+            width: min(380px, calc(100% - 32px));
+            padding: 36px 32px;
+            border: 1px solid rgba(57, 255, 20, 0.55);
+            border-radius: 16px;
+            background: rgba(16, 21, 16, 0.96);
+            box-shadow:
+                0 0 20px rgba(57, 255, 20, 0.18),
+                0 0 60px rgba(57, 255, 20, 0.08);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            color: var(--verde-neon);
+            text-align: center;
+            text-shadow: 0 0 12px rgba(57, 255, 20, 0.75);
+            font-size: 28px;
+        }
+
+        .subtitulo {
+            margin: 0 0 28px;
+            color: #9da89e;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 7px;
+            color: var(--verde-claro);
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            height: 46px;
+            padding: 0 14px;
+            border: 1px solid #344234;
+            border-radius: 8px;
+            outline: none;
+            background: #080b08;
+            color: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--verde-neon);
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.35);
+        }
+
+        button {
+            width: 100%;
+            height: 48px;
+            margin-top: 24px;
+            border: none;
+            border-radius: 8px;
+            background: var(--verde-neon);
+            color: #071007;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 16px rgba(57, 255, 20, 0.45);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 24px rgba(57, 255, 20, 0.75);
+        }
+
+        #mensagem {
+            min-height: 20px;
+            margin: 14px 0 0;
+            text-align: center;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <main class="login">
+        <h1>SISTEMA DE ESTOQUE</h1>
+        <p class="subtitulo">Acesse sua conta</p>
+
+        <form id="formulario-login">
+            <label for="usuario">Login</label>
+            <input id="usuario" name="usuario" type="text" autocomplete="username" required>
+
+            <label for="senha">Senha</label>
+            <input id="senha" name="senha" type="password" autocomplete="current-password" required>
+
+            <button type="submit">ENTRAR</button>
+            <p id="mensagem" role="alert"></p>
+        </form>
+    </main>
+
+    <script>
+        const formulario = document.getElementById("formulario-login");
+        const mensagem = document.getElementById("mensagem");
+
+        formulario.addEventListener("submit", (evento) => {
+            evento.preventDefault();
+
+            const usuario = document.getElementById("usuario").value.trim();
+            const senha = document.getElementById("senha").value;
+
+            if (!usuario || !senha) {
+                mensagem.textContent = "Preencha o login e a senha.";
+                return;
+            }
+
+            if (usuario === "admin" && senha === "Estoque@123") {
+                mensagem.style.color = "#39ff14";
+                mensagem.textContent = "Login realizado com sucesso.";
+            } else {
+                mensagem.style.color = "#ff6b6b";
+                mensagem.textContent = "Usuário ou senha incorretos.";
+            }
+        });
+    </script>
+</body>
+</html>
